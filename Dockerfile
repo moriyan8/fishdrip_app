@@ -1,3 +1,4 @@
+# Dockerfile
 # syntax = docker/dockerfile:1
 
 # Make sure this matches .ruby-version
@@ -43,4 +44,5 @@ USER rails
 
 EXPOSE 3000
 
-CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
+# Renderで起動時にマイグレーションしてからサーバ起動
+CMD ["sh", "-c", "bundle exec rails db:migrate && bundle exec rails server -b 0.0.0.0"]
