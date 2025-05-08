@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  host: <%= ENV['POSTGRES_HOST'] %>
+  port: 5432
+
+development:
+  <<: *default
+  database: fishdrip_development
+
+test:
+  <<: *default
+  database: fishdrip_test
+
+production:
+  <<: *default
+  database: fishdrip_production
+  host: <%= ENV['POSTGRES_HOST'] || 'localhost' %>  # Renderのホスト名を使えるように
