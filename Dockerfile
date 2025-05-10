@@ -7,6 +7,7 @@ FROM ruby:$RUBY_VERSION-slim AS base
 
 WORKDIR /app
 
+# Node.js と Yarn を公式スクリプトでインストール
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
       build-essential \
@@ -17,6 +18,14 @@ RUN apt-get update -qq && \
       libvips \
       postgresql-client \
       git \
+      gnupg \
+    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
+    && apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+      nodejs \
+      yarn \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
 
 # Bundlerバージョンを2.5.22に指定
@@ -30,6 +39,10 @@ ENV RAILS_ENV="production" \
 # Copy Gemfiles and install gems
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --jobs 4 --retry 3
+
+# package.json / yarn.lock を先にコピーして依存解決（キャッシュ最適化）
+COPY package.json yarn.lock ./
+RUN yarn install
 
 # Copy app source
 COPY . .

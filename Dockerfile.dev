@@ -16,22 +16,36 @@ RUN apt-get update -qq && \
       libvips \
       postgresql-client \
       git \
+      nodejs \
+      npm \
+      gnupg \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
+
+# Yarn のインストール
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && \
+    apt-get install --no-install-recommends -y yarn
 
 # Bundlerバージョンを2.5.22に指定
 RUN gem install bundler -v 2.5.22
 
-# GemfileとGemfile.lockをコピーして依存関係をインストール
+# GemfileとGemfile.lockをコピーして依存関係をインストール（root権限のまま）
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
-# アプリケーションコードをコピー
+# esbuild をインストール
+RUN yarn add --dev esbuild
+
+# アプリケーションコードをコピー（root権限のまま）
 COPY . .
 
-# 非rootユーザーで実行（本番と揃える）
+# railsユーザー作成と所有権変更（/usr/local/bundleも含む）
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
-    chown -R rails:rails /app
+    chown -R rails:rails /app /usr/local/bundle
+
+# 以降の実行は非rootユーザー
 USER rails
 
 EXPOSE 3000

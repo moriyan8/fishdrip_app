@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+ .form-label {
+  color: black !important;
+}
+.modal-title {
+  color: black !important;
+}
+.custom-header {
+  border-bottom: 1px solid #423f3f !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
