@@ -6,7 +6,6 @@ class User < ApplicationRecord
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
   #確認用パスワードの入力が存在することを確認
   validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
-
   #新規にユーザーが登録された際に、emailが存在するか、登録済みかどうかを確認
   validates :email, uniqueness: true, presence: true
   #新規にユーザーが登録された際に、nameが存在するかどうかの確認と文字数の制限
