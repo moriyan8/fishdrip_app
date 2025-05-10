@@ -11,6 +11,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path, notice: "ユーザー登録が完了しました"
     else
+      @hide_header = true
       render :new
     end
   end

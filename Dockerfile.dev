@@ -30,12 +30,13 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 # Bundlerバージョンを2.5.22に指定
 RUN gem install bundler -v 2.5.22
 
-# GemfileとGemfile.lockをコピーして依存関係をインストール（root権限のまま）
+# Rubyの依存関係をインストール
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
-# esbuild をインストール
-RUN yarn add --dev esbuild
+# Node.jsの依存関係をインストール（esbuild含む）
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 
 # アプリケーションコードをコピー（root権限のまま）
 COPY . .
