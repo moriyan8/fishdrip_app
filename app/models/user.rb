@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :posts, dependent: :destroy
+
+
   authenticates_with_sorcery!
   #ユーザーが設定したパスワードの長さが3文字以上であることを確認
   validates :password, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }

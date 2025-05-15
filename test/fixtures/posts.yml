@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fish_name: MyString
+  fish_size: 1.5
+  spot: MyString
+  spot_detail: MyString
+  fishing_date: 2025-05-13 12:12:33
+  weather: 1
+  temperature: 1
+  tide: MyString
+  comment: MyText
+  memo: MyText
+  status: 1
+  latitude: 1.5
+  longitude: 1.5
+
+two:
+  fish_name: MyString
+  fish_size: 1.5
+  spot: MyString
+  spot_detail: MyString
+  fishing_date: 2025-05-13 12:12:33
+  weather: 1
+  temperature: 1
+  tide: MyString
+  comment: MyText
+  memo: MyText
+  status: 1
+  latitude: 1.5
+  longitude: 1.5
