@@ -1,0 +1,39 @@
+<div class="text-light fs-3 mb-4">
+  <div class="d-flex flex-column gap-2">
+    <div class="card border-0 rounded-0" style="background-color: #1f1f1f; border-bottom: 1px solid #3a3a3a;">
+      <div class="row g-0 align-items-center">
+
+        <!-- 左：画像と釣り場 -->
+        <div class="col-4">
+          <% if @post.image.attached? %>
+            <%= image_tag(@post.image, class: "img-contained rounded-0", alt: @post.fish_name) %>
+          <% else %>
+            <%= image_tag("no-image.png", class: "img-contained rounded-0", alt: "No image") %>
+          <% end %>
+        </div>
+
+        <!-- 右：情報 -->
+        <div class="col-8">
+          <div class="card-body text-light">
+            <h5 class="card-title fs-4 fw-bold mb-2 text-white"><%= @post.fish_name %></h5>
+            <p class="card-text fs-6 mb-1 text-secondary">投稿者: <%= @post.user.name %></p>
+            <p class="card-text fs-6 mb-1"><strong>サイズ:</strong> <%= @post.fish_size %> cm</p>
+            <p class="card-text fs-6 mb-1"><strong>日時:</strong> <%= l(@post.fishing_date, format: :short) %></p>
+            <p class="card-text fs-6 mb-1"><strong>天気:</strong> <%= I18n.t("weather.#{@post.weather}") %></p>
+            <p class="card-text fs-6 mb-1"><strong>気温:</strong> <%= @post.temperature %> ℃</p>
+
+            <% if @post.memo.present? %>
+              <p class="card-text fs-6 mb-1"><strong>メモ:</strong> <%= @post.memo %></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="px-4 py-2 text-light">
+          <i class="bi bi-geo-alt fs-3 me-2"></i>
+          <%= @post.spot_detail.presence || "未設定" %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,15 @@
 ja:
+  activerecord:
+    models:
+      post: 投稿
+    attributes:
+      post:
+        image: 写真
+        fish_name: 魚種
+        fishing_date: 釣行日時
+  errors:
+    messages:
+      blank: を入力してください
   date:
     formats:
       short: "%Y/%m/%d"

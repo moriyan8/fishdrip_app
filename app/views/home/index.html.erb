@@ -1,6 +1,4 @@
 <div class="text-light fs-3 mb-4">
-  <h1 class="mb-4">釣果一覧</h1>
-
   <div class="d-flex flex-column gap-2">
     <% @posts.each do |post| %>
       <div class="card border-0 rounded-0" style="background-color: #1f1f1f; border-bottom: 1px solid #3a3a3a;">
@@ -8,9 +6,9 @@
           <!-- 左：画像 -->
           <div class="col-md-4">
             <% if post.image.attached? %>
-              <%= link_to image_tag(post.image, class: "img-contained rounded-0", alt: post.fish_name), "#" %>
+              <%= link_to image_tag(post.image, class: "img-contained rounded-0", alt: post.fish_name), post_path(post) %>
             <% else %>
-              <%= link_to image_tag("no-image.png", class: "img-contained rounded-0", alt: "No image"), "#" %>
+              <%= link_to image_tag("no-image.png", class: "img-contained rounded-0", alt: "No image"), post_path(post) %>
             <% end %>
           </div>
 

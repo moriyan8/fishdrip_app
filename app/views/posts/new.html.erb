@@ -4,6 +4,18 @@
       <h4 class="card-title text-center mb-4">新しい投稿</h4>
 
       <%= form_with(model: @post, local: true, html: { multipart: true }) do |form| %>
+
+        <% if @post.errors.any? %>
+          <div class="alert alert-danger rounded-3">
+            <h5>入力にエラーがあります:</h5>
+            <ul class="mb-0">
+              <% @post.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
         <!-- 写真 -->
         <div class="mb-3">
           <%= form.label :image, "写真", class: "form-label" %>
