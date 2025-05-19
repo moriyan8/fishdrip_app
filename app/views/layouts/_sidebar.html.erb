@@ -6,14 +6,30 @@
     <li class="nav-item">
       <a class="nav-link text-white" href="<%= root_path %>">Home</a>
     </li>
+
     <li class="nav-item">
-      <a class="nav-link text-white" href="#">投稿</a>
+      <% if user_signed_in? %>
+        <%= link_to '投稿', new_post_path, class: 'nav-link text-white' %>
+      <% else %>
+        <a class="nav-link text-white" href="#" onclick="alert('ログインしてください'); return false;">投稿</a>
+      <% end %>
     </li>
+
     <li class="nav-item">
-      <a class="nav-link text-white" href="#">Map</a>
+      <% if user_signed_in? %>
+        <%= link_to 'Map', "#", class: 'nav-link text-white' %>
+      <% else %>
+        <a class="nav-link text-white" href="#" onclick="alert('ログインしてください'); return false;">Map</a>
+      <% end %>
     </li>
+
     <li class="nav-item">
-      <a class="nav-link text-white" href="#">マイページ</a>
+      <% if user_signed_in? %>
+        <%= link_to 'マイページ', "#", class: 'nav-link text-white' %>
+      <% else %>
+        <a class="nav-link text-white" href="#" onclick="alert('ログインしてください'); return false;">マイページ</a>
+      <% end %>
     </li>
   </ul>
 </nav>
+

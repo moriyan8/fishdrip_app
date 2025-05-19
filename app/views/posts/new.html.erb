@@ -1,0 +1,64 @@
+<div class="container mt-5" style="max-width: 500px;">
+  <div class="card shadow rounded-4">
+    <div class="card-body">
+      <h4 class="card-title text-center mb-4">新しい投稿</h4>
+
+      <%= form_with(model: @post, local: true, html: { multipart: true }) do |form| %>
+        <!-- 写真 -->
+        <div class="mb-3">
+          <%= form.label :image, "写真", class: "form-label" %>
+          <%= form.file_field :image, class: "form-control" %>
+        </div>
+
+        <!-- 日時 -->
+        <div class="mb-3">
+          <%= form.label :fishing_date, "釣行日時", class: "form-label" %>
+          <%= form.datetime_field :fishing_date, class: "form-control" %>
+        </div>
+
+        <!-- 魚種 -->
+        <div class="mb-3">
+          <%= form.label :fish_name, "魚種", class: "form-label" %>
+          <%= form.text_field :fish_name, class: "form-control", placeholder: "例：スズキ" %>
+        </div>
+
+
+        <!-- サイズ -->
+        <div class="mb-3">
+          <%= form.label :fish_size, "サイズ（cm）", class: "form-label" %>
+          <%= form.number_field :fish_size, class: "form-control", step: 0.1 %>
+        </div>
+
+        <!-- 天気（セレクトボックス） -->
+        <div class="mb-3">
+          <%= form.label :weather, "天気", class: "form-label" %>
+          <%= form.select :weather, Post.weathers.keys.map { |w| [I18n.t("weather.#{w}"), w] }, {}, { class: "form-select" } %>
+        </div>
+
+        <!-- 気温（数値入力） -->
+        <div class="mb-3">
+          <%= form.label :temperature, "気温（℃）", class: "form-label" %>
+          <%= form.number_field :temperature, class: "form-control", step: 1 %>
+        </div>
+
+        <!-- メモ -->
+        <div class="mb-3">
+          <%= form.label :memo, "メモ", class: "form-label" %>
+          <%= form.text_area :memo, class: "form-control", rows: 3, placeholder: "自由にメモを書いてください" %>
+        </div>
+
+        <!-- 場所 -->
+        <div class="mb-3">
+          <%= form.label :spot_detail, "釣り場（地名）", class: "form-label" %>
+          <%= form.text_field :spot_detail, class: "form-control", placeholder: "例：長崎県五島列島田の浦港" %>
+        </div>
+
+        <%= form.hidden_field :status, value: "post" %>
+
+        <div class="d-grid">
+          <%= form.submit "投稿する", class: "btn btn-primary rounded-pill" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

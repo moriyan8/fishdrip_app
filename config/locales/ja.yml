@@ -2,6 +2,15 @@ ja:
   date:
     formats:
       short: "%Y/%m/%d"
+    order:
+      - :year
+      - :month
+      - :day
   time:
     formats:
       short: "%Y/%m/%d %H:%M"
+  weather:
+    sunny: "晴れ"
+    cloudy: "くもり"
+    rainy: "雨"
+    snowy: "雪"

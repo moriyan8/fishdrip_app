@@ -8,9 +8,9 @@
           <!-- 左：画像 -->
           <div class="col-md-4">
             <% if post.image.attached? %>
-              <%= link_to image_tag(post.image, class: "img-fluid rounded-0", alt: post.fish_name), "#" %>
+              <%= link_to image_tag(post.image, class: "img-contained rounded-0", alt: post.fish_name), "#" %>
             <% else %>
-              <%= link_to image_tag("no-image.png", class: "img-fluid rounded-0", alt: "No image"), "#" %>
+              <%= link_to image_tag("no-image.png", class: "img-contained rounded-0", alt: "No image"), "#" %>
             <% end %>
           </div>
 
@@ -24,7 +24,7 @@
               <p class="card-text fs-6 mb-1 text-secondary">投稿者: <%= post.user.name %></p>
               <!-- その他の情報 -->
               <p class="card-text fs-6 mb-1"><strong>サイズ:</strong> <%= post.fish_size %> cm</p>
-              <p class="card-text fs-6 mb-1"><strong>釣れた場所:</strong> <%= post.spot %></p>
+              <p class="card-text fs-6 mb-1"><strong>釣れた場所:</strong> <%= post.spot_detail %></p>
               <p class="card-text fs-6 mb-1"><strong>日時:</strong> <%= l(post.fishing_date, format: :short) %></p>
               <!-- コメント -->
               <p class="card-text fs-6 text-light"><%= truncate(post.comment, length: 60) %></p>
