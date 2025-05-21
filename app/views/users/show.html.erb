@@ -1,0 +1,32 @@
+<div class="container mt-4">
+  <!-- ユーザーネームと編集ボタン -->
+  <div class="d-flex justify-content-between align-items-center mb-5 pb-3 border-bottom border-light">
+    <h3 class="mb-0"><%= @user.name %> さんのマイページ</h3>
+    <%= link_to 'プロフィールを編集', "#", class: "btn btn-outline-secondary btn-sm" %>
+  </div>
+
+  <!-- 投稿があるかチェック -->
+  <% if @user.posts.any? %>
+    <div class="row pt-3">
+      <% @user.posts.each do |post| %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <% if post.image.attached? %>
+              <%= image_tag post.image, class: "card-img-top", style: "object-fit: cover; height: 200px;" %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= post.fish_name %>（<%= post.fish_size %>cm）</h5>
+              <p class="card-text"><%= truncate(post.memo, length: 50) %></p>
+              <p class="card-text"><small class="text-muted"><%= post.created_at.strftime("%Y年%m月%d日") %></small></p>
+              <%= link_to '投稿を見る', post_path(post), class: "btn btn-outline-primary btn-sm" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-info text-center pt-3">
+      まだ投稿がありません。
+    </div>
+  <% end %>
+</div>

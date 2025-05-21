@@ -4,6 +4,11 @@ class UsersController < ApplicationController
     @hide_header = true
   end
 
+  def show
+    redirect_to root_path unless params[:id].to_i == current_user.id
+    @user = current_user
+  end
+
   def create
     @user = User.new(user_params)
 

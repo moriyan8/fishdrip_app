@@ -16,16 +16,16 @@
               <%= button_to "ログアウト", logout_path, method: :delete, class: "btn btn-link nav-link", form: { class: "d-inline", onsubmit: "return confirm('ログアウトしますか？');" } %>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="bi bi-person-circle text-white"></i>
-              </a>
+              <%= link_to user_path(current_user), class: 'nav-link d-flex align-items-center' do %>
+                <i class="bi bi-person-circle text-white fs-4"></i>
+              <% end %>
             </li>
           <% else %>
             <li class="nav-item">
               <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">ログイン</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="#" class="nav-link" onclick="alert('ログインしてください'); return false;">
                 <i class="bi bi-person-circle text-white"></i>
               </a>
             </li>
