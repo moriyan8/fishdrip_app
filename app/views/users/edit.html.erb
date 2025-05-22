@@ -1,0 +1,57 @@
+<div style="margin: 0; height: 100vh; background-color: #121212;">
+  <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+    <div class="accordion accordion-flush" id="accordionFlush"
+         style="width: 600px; background-color: #1f1f1f; color: white; border: 1px solid gray; border-radius: 8px;">
+      <div class="accordion-item" style="background-color: #1f1f1f; color: white;">
+        <h2 class="accordion-header" id="flush-headingOne">
+          <button class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseOne"
+                  aria-expanded="false"
+                  aria-controls="flush-collapseOne"
+                  style="background-color: #1f1f1f; color: white;">
+            ユーザー編集フォーム
+          </button>
+        </h2>
+        <div id="flush-collapseOne"
+             class="accordion-collapse collapse show"
+             aria-labelledby="flush-headingOne"
+             data-bs-parent="#accordionFlush">
+          <div class="accordion-body text-center">
+            <h5 class="text-light">ユーザー情報の編集</h5>
+            <div style="height: 20px;"></div>
+
+            <%= form_with model: @user, url: user_path(@user), method: :patch, local: true, html: { class: "form-group" } do |form| %>
+              <% if @user.errors.any? %>
+                <div class="alert alert-danger">
+                  <ul>
+                    <% @user.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+
+              <div class="mb-3 text-start">
+                <%= form.label :name, "ユーザー名", class: "form-label text-light" %>
+                <%= form.text_field :name, class: "form-control", placeholder: "ユーザー名を入力" %>
+              </div>
+
+              <div style="height: 20px;"></div>
+
+              <div class="d-grid">
+                <%= form.submit "更新する", class: "btn btn-outline-primary" %>
+              </div>
+            <% end %>
+
+            <div class="mt-3">
+              <%= link_to "戻る", user_path(@user), class: "btn btn-outline-light btn-sm" %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
