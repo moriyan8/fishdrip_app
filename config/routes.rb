@@ -21,5 +21,9 @@ Rails.application.routes.draw do
 
   root 'home#index'
   resources :users, only: [:new, :create, :show, :edit, :update]
-  resources :posts, only: [:new, :create, :show, :destroy]
+  resources :posts, only: [:new, :create, :show, :destroy] do
+    collection do
+      get :map
+    end
+  end
 end

@@ -27,6 +27,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def map
+    @posts = Post.where.not(latitude: nil, longitude: nil)
+  end
+
   private
 
   def post_params
