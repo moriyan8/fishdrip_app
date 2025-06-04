@@ -1,0 +1,26 @@
+<div class="container mt-5" style="max-width: 500px;">
+  <h2 class="text-center mb-4 text-white">ログイン</h2>
+
+  <!-- エラーメッセージ表示用 -->
+  <div id="login-alert" class="alert alert-danger d-none" role="alert"></div>
+
+  <%= form_with url: login_path, method: :post, html: { id: "login-form" }, local: true do |form| %>
+    <div class="mb-3">
+      <%= form.label :email, "メールアドレス", class: "form-label text-white" %>
+      <%= form.email_field :email, class: "form-control", id: "login-email", placeholder: "メールアドレスを入力" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :password, "パスワード", class: "form-label text-white" %>
+      <%= form.password_field :password, class: "form-control", id: "login-password", placeholder: "パスワードを入力" %>
+    </div>
+
+    <div class="d-grid">
+      <%= form.submit "ログイン", class: "btn btn-primary", id: "login-submit", disabled: true %>
+    </div>
+  <% end %>
+
+  <div class="mt-3 text-center">
+    <p class="text-white">アカウントをお持ちでないですか？ <%= link_to '新規登録', new_user_path, class: 'btn btn-link p-0 text-white' %></p>
+  </div>
+</div>

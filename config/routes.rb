@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # ログイン・ログアウトルート
-  post '/login',  to: 'sessions#create', as: :login
+  get "/login", to: "sessions#new", as: :login
+  post '/login',  to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: :logout
 
   # Defines the root path route ("/")
