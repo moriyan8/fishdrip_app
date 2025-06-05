@@ -28,17 +28,26 @@
 
 .img-contained {
   width: 100%;
-  height: 200px; /* 枠の高さを固定 */
+  height: 200px;
   object-fit: contain;
   object-position: center;
-  background-color: #000; /* 余白の背景色（任意、黒など） */
+  background-color: #000;
 }
 
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  overflow-y: auto;
+  transition: width 0.3s ease;
+}
+
+/* スマホ時のサイドバー調整 */
 @media (max-width: 767.98px) {
   .sidebar {
     width: 70px !important;
     padding: 1rem 0.5rem !important;
     align-items: center;
+    flex-shrink: 0;
   }
 
   .sidebar .nav-link {
@@ -50,8 +59,17 @@
     font-size: 1.5rem;
   }
 
-  .sidebar .text-decoration-none {
+  .sidebar .text-decoration-none,
+  .sidebar .nav-link {
     justify-content: center;
   }
-}
 
+  .sidebar h4,
+  .sidebar .nav-link span {
+    display: none;
+  }
+
+  body, html {
+    overflow-x: hidden;
+  }
+}
