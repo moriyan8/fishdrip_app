@@ -3,6 +3,7 @@
 
   <% if @user.errors.any? %>
     <div class="alert alert-danger">
+      <p class="mb-2"><strong>入力内容に誤りがあります。以下をご確認ください：</strong></p>
       <ul class="mb-0">
         <% @user.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>

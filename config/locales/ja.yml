@@ -2,14 +2,27 @@ ja:
   activerecord:
     models:
       post: 投稿
+      user: ユーザー
     attributes:
       post:
         image: 写真
         fish_name: 魚種
         fishing_date: 釣行日時
+      user:
+        email: メールアドレス
+        name: ユーザー名
+        password: パスワード
+        password_confirmation: パスワード確認
   errors:
     messages:
       blank: を入力してください
+      too_short: "は%{count}文字以上で入力してください"
+      too_long: "は%{count}文字以内で入力してください"
+      confirmation: "と確認用%{attribute}が一致しません"
+      taken: "はすでに登録されています"
+      invalid: "は不正な値です"
+      not_saved: "保存できませんでした"
+    format: "%{attribute} %{message}"
   date:
     formats:
       short: "%Y/%m/%d"
