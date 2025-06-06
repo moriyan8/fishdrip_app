@@ -10,12 +10,16 @@
       const map = new google.maps.Map(document.getElementById("map"), {
         center: location,
         zoom: 12,
+        mapId: "5b0ddb083e30159a5b08df12"
       });
 
-      new google.maps.Marker({
+      // AdvancedMarkerElement によるマーカー表示
+      const { AdvancedMarkerElement } = google.maps.marker;
+
+      const marker = new AdvancedMarkerElement({
         position: location,
         map: map,
-        title: title,
+        title: title
       });
     }
 
@@ -40,7 +44,9 @@
   };
 </script>
 
-<!-- Google Maps API -->
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHyYOC8EXmkV7ZfkAZbPbKMsXGmUrMs7M&callback=initMap">
+<!-- Google Maps API（marker ライブラリを追加） -->
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHyYOC8EXmkV7ZfkAZbPbKMsXGmUrMs7M&callback=initMap&libraries=marker">
+  async
+  defer
 </script>
