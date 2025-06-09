@@ -2,7 +2,9 @@ class SessionsController < ApplicationController
   def create
     email = params[:email]
     password = params[:password]
-    @user = login(email, password)
+    remember = params[:remember_me] == "1"
+
+    @user = login(email, password, remember_me: remember)
 
     if @user
       redirect_to root_path, notice: "ログインしました"

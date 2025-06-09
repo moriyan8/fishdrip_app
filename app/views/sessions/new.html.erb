@@ -15,6 +15,11 @@
       <%= form.password_field :password, class: "form-control", id: "login-password", placeholder: "パスワードを入力" %>
     </div>
 
+    <div class="form-check mb-3">
+      <%= form.check_box :remember_me, class: "form-check-input", id: "remember-me" %>
+      <%= form.label :remember_me, "次回から自動ログイン", class: "form-check-label text-white" %>
+    </div>
+
     <div class="d-grid">
       <%= form.submit "ログイン", class: "btn btn-primary", id: "login-submit", disabled: true %>
     </div>
