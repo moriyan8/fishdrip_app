@@ -2,7 +2,14 @@
   <h2 class="text-center mb-4 text-white">ログイン</h2>
 
   <!-- エラーメッセージ表示用 -->
-  <div id="login-alert" class="alert alert-danger d-none" role="alert"></div>
+  <% if flash[:alert] %>
+    <div class="alert alert-danger">
+      <%= flash[:alert] %>
+      <% if @resend_email.present? %>
+        <%= link_to 'こちら', resend_activation_users_path(email: @resend_email), class: "alert-link" %>
+      <% end %>
+    </div>
+  <% end %>
 
   <%= form_with url: login_path, method: :post, html: { id: "login-form" }, local: true do |form| %>
     <div class="mb-3">

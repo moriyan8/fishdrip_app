@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
 
   authenticates_with_sorcery!
+
   #ユーザーが設定したパスワードの長さが5文字以上であることを確認
   validates :password, length: { minimum: 5 }, if: -> { new_record? || changes[:crypted_password] }
   #ユーザーが設定したパスワードと確認用のパスワードが一致していることを確認
@@ -12,4 +13,8 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true
   #新規にユーザーが登録された際の文字数の制限
   validates :name, length: { maximum: 20 }
+
+  def deliver_activation_email!
+    UserMailer.activation_needed_email(self).deliver_now
+  end
 end

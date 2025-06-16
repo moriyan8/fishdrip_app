@@ -20,11 +20,27 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
+
   root 'home#index'
-  resources :users, only: [:new, :create, :show, :edit, :update]
+  resources :users, only: [:new, :create, :show, :edit, :update] do
+    collection do
+      get 'activate', to: 'users#activate'
+      get :resend_activation
+    end
+  end
+
   resources :posts, only: [:new, :create, :show, :destroy] do
     collection do
       get :map
     end
   end
+
+  resources :sessions, only: [:new, :create, :destroy]
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
+
 end
