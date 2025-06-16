@@ -14,7 +14,8 @@ class User < ApplicationRecord
   #新規にユーザーが登録された際の文字数の制限
   validates :name, length: { maximum: 20 }
 
-  def deliver_activation_email!
-    UserMailer.activation_needed_email(self).deliver_now
-  end
+  # メール機能、実装予定日遅らせます。
+  # def deliver_activation_email!
+  #   UserMailer.activation_needed_email(self).deliver_now
+  # end
 end

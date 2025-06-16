@@ -5,9 +5,6 @@
   <% if flash[:alert] %>
     <div class="alert alert-danger">
       <%= flash[:alert] %>
-      <% if @resend_email.present? %>
-        <%= link_to 'こちら', resend_activation_users_path(email: @resend_email), class: "alert-link" %>
-      <% end %>
     </div>
   <% end %>
 
