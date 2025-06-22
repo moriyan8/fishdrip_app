@@ -38,6 +38,12 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :nfts, only: [:create]
+    end
+  end
+
   resources :sessions, only: [:new, :create, :destroy]
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
