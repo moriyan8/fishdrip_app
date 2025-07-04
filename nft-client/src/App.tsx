@@ -7,7 +7,7 @@ import {
 import { getContract } from "thirdweb";
 import { editionDropAbi } from "thirdweb/abi";
 import { createThirdwebClient } from "thirdweb";
-import { useState } from "react";
+//import { useState } from "react";
 
 const client = createThirdwebClient({
   clientId: import.meta.env.VITE_THIRDWEB_CLIENT_ID,
@@ -21,7 +21,7 @@ export default function App() {
 
   const contract = getContract({
     client,
-    chain: 137, // polygon
+    chain: 137,
     address: CONTRACT_ADDRESS,
     abi: editionDropAbi,
   });
@@ -34,7 +34,7 @@ export default function App() {
 
   const claimTx = useSendTransaction({
     contract,
-    method: "claim",
+    method: "claim",a
   });
 
   const handleMint = () => {
