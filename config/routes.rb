@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
+  # Googleログイン
+  get "/oauth/callback", to: "oauths#callback"
+  get "/login/:provider", to: "oauths#oauth", as: :auth_at_provider
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end

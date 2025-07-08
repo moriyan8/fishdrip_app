@@ -34,7 +34,7 @@ export default function App() {
 
   const claimTx = useSendTransaction({
     contract,
-    method: "claim",a
+    method: "claim",
   });
 
   const handleMint = () => {
