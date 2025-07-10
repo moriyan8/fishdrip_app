@@ -49,12 +49,11 @@ class OauthsController < ApplicationController
 
   def google_oauth_authorize_url
     client_id = ENV["GOOGLE_CLIENT_ID"]
-    redirect_uri = "http://localhost:3000/oauth/callback?provider=google"
     scope = "email profile"
     "https://accounts.google.com/o/oauth2/auth?" +
       URI.encode_www_form({
         client_id: client_id,
-        redirect_uri: redirect_uri,
+        redirect_uri: google_redirect_uri,
         response_type: "code",
         scope: scope
       })
@@ -66,7 +65,7 @@ class OauthsController < ApplicationController
       code: code,
       client_id: ENV["GOOGLE_CLIENT_ID"],
       client_secret: ENV["GOOGLE_CLIENT_SECRET"],
-      redirect_uri: "http://localhost:3000/oauth/callback?provider=google",
+      redirect_uri: google_redirect_uri,
       grant_type: "authorization_code"
     })
     JSON.parse(res.body)
@@ -76,5 +75,13 @@ class OauthsController < ApplicationController
     uri = URI("https://www.googleapis.com/oauth2/v2/userinfo?access_token=#{access_token}")
     res = Net::HTTP.get(uri)
     JSON.parse(res)
+  end
+
+  def google_redirect_uri
+    if Rails.env.production?
+      "https://fishdrip.jp/oauth/callback?provider=google"
+    else
+      "http://localhost:3000/oauth/callback?provider=google"
+    end
   end
 end
