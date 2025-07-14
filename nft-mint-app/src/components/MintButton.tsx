@@ -27,7 +27,7 @@ export function MintButton() {
       }
       disabled={!account}
       onTransactionConfirmed={() => alert("🎉 ミント成功！")}
-      onError={(err) => alert("❌ エラー：" + err.message)}
+      onError={(err) => alert("❌ エラー（ミント失敗しました。）：" + err.message)}
     >
       Mint NFT
 
