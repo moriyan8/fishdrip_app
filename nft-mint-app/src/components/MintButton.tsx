@@ -32,7 +32,7 @@ export function MintButton() {
       gasless={{
         provider: "openzeppelin",
         relayerUrl: import.meta.env.VITE_OPENZEPPELIN_RELAYER_URL,
-        relayerForwarderAddress: "0x64CD353384109423a966dCd3Aa30D884C9b2E057",
+        relayerForwarderAddress: "0x93860c8e6E728eF8a2414747CD752464C8a5B34b",
       }}
     >
       Mint NFT
