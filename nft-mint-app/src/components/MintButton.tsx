@@ -28,6 +28,12 @@ export function MintButton() {
       disabled={!account}
       onTransactionConfirmed={() => alert("🎉 ミント成功！")}
       onError={(err) => alert("❌ エラー（ミント失敗しました。）：" + err.message)}
+
+      gasless={{
+        provider: "openzeppelin",
+        relayerUrl: import.meta.env.VITE_OPENZEPPELIN_RELAYER_URL,
+        relayerForwarderAddress: "0x64CD353384109423a966dCd3Aa30D884C9b2E057",
+      }}
     >
       Mint NFT
 

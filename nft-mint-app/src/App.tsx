@@ -6,7 +6,7 @@ import { wallets } from "./wallets";
 export function App() {
   return (
     <main className="p-10 flex flex-col items-center gap-8">
-      <h2 className="text-white text-2xl font-bold drop-shadow-lg">NFT mint!</h2>
+      <h2 className="text-white text-2xl font-bold drop-shadow-lg">NFT free mint!</h2>
       <img
         src="/assets/nft1.jpeg"
         alt="NFT Preview"
