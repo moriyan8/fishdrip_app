@@ -2,8 +2,20 @@
   <!-- ユーザーネームと編集ボタン -->
   <div class="d-flex justify-content-between align-items-center mb-5 pb-3 border-bottom border-light">
     <h3 class="mb-0"><%= @user.name %> さんのマイページ</h3>
-    <%= link_to 'プロフィールを編集', edit_user_path(@user), class: "btn btn-outline-secondary btn-sm" %>
+    <div class="d-flex ms-auto">
+      <%= link_to "OpenSeaでNFTを確認", "https://opensea.io/profile", class: "btn btn-outline-secondary btn-sm ms-2" %>
+      <%= link_to "プロフィールを編集", edit_user_path(@user), class: "btn btn-outline-secondary btn-sm ms-2" %>
+    </div>
   </div>
+
+  <% if @user.posts.any? %>
+    <div class="d-flex justify-content-between align-items-center mb-5 pb-3 border-bottom border-light">
+      <div class="text-center mt-6">
+        <h5 class="mb-2">初投稿🎊NFT</h5>
+        <%= link_to "NFTをミントする", 'https://fishdrip-mint-app.onrender.com', class: "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>
 
   <!-- 投稿があるかチェック -->
   <% if @user.posts.any? %>
