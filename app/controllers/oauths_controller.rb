@@ -3,6 +3,8 @@ require 'uri'
 require 'json'
 
 class OauthsController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def oauth
     redirect_to google_oauth_authorize_url, allow_other_host: true
   end

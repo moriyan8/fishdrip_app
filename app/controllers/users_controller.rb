@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def new
     @user = User.new
     @hide_header = true
@@ -28,7 +30,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to @user, notice: "ユーザー名を更新しました"
+      redirect_to @user, notice: "更新しました"
     else
       render :edit, status: :unprocessable_entity
     end

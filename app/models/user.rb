@@ -7,12 +7,22 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
 
   def using_oauth?
-    user_authentications.any? || self.user_authentications_attributes&.any?
+    user_authentications.any? || (
+      respond_to?(:user_authentications_attributes) && user_authentications_attributes&.any?
+    )
   end
 
-  validates :password, length: { minimum: 5 }, unless: :using_oauth?
+  def password_required?
+    if new_record?
+      !using_oauth?
+    else
+      password.present?
+    end
+  end
+
+  validates :password, length: { minimum: 5 }, confirmation: true, if: :password_required?
   validates :password, confirmation: true, unless: :using_oauth?
-  validates :password_confirmation, presence: true, unless: :using_oauth?
+  validates :password_confirmation, presence: true, if: :password_required?
   validates :email, uniqueness: true, presence: true
   validates :name, presence: true, length: { maximum: 20 }, unless: :using_oauth?
 end
