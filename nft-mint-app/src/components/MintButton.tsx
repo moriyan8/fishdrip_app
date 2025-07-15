@@ -26,7 +26,12 @@ export function MintButton() {
         })
       }
       disabled={!account}
-      onTransactionConfirmed={() => alert("🎉 ミント成功！")}
+      onTransactionConfirmed={() => {
+        const confirmed = window.confirm("🎉 ミント成功しました！\nアプリに戻りますか？");
+        if (confirmed) {
+          window.location.href = "https://fishdrip.jp/";
+        }
+      }}
       onError={(err) => alert("❌ エラー（ミント失敗しました。）：" + err.message)}
 
       //ガスレス機能（バグあり）
