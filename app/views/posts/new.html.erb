@@ -67,8 +67,13 @@
 
         <%= form.hidden_field :status, value: "post" %>
 
-        <div class="d-grid">
-          <%= form.submit "投稿する", class: "btn btn-primary rounded-pill" %>
+        <div class="d-flex justify-content-center gap-2">
+          <button type="submit" name="commit_type" value="post" class="btn btn-primary rounded-pill px-4">
+            投稿する
+          </button>
+          <button type="submit" name="commit_type" value="record" class="btn btn-warning rounded-pill px-4">
+            記録する
+          </button>
         </div>
       <% end %>
     </div>

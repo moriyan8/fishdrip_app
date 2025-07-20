@@ -11,9 +11,14 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+    @post.status = params[:commit_type]
 
     if @post.save
-      redirect_to root_path, notice: '投稿が完了しました！'
+      if @post.status == "post"
+        redirect_to root_path, notice: '投稿が完了しました！'
+      else
+        redirect_to user_path(current_user), notice: '記録が完了しました！'
+      end
     else
       render :new, status: :unprocessable_entity
     end

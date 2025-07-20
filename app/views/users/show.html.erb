@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <% if @user.posts.any? %>
+  <% if @user.posts.where(status: :post).any? %>
     <div class="d-flex justify-content-between align-items-center mb-5 pb-3 border-bottom border-light">
       <div class="text-center mt-6">
         <h5 class="mb-2">初投稿🎊NFT</h5>
@@ -20,16 +20,24 @@
   <!-- 投稿があるかチェック -->
   <% if @user.posts.any? %>
     <div class="row pt-3">
-      <% @user.posts.each do |post| %>
+      <% @user.posts.order(created_at: :desc).each do |post| %>
         <div class="col-md-4 mb-4">
           <div class="card h-100">
             <% if post.image.attached? %>
               <%= image_tag post.image, class: "card-img-top", style: "object-fit: cover; height: 200px;" %>
             <% end %>
             <div class="card-body">
+              <!-- 投稿/記録のタグ -->
+              <span class="badge <%= post.post? ? "bg-primary" : "bg-warning text-dark" %> mb-2">
+                <%= post.post? ? "投稿" : "記録" %>
+              </span>
+
               <h5 class="card-title"><%= post.fish_name %>（<%= post.fish_size %>cm）</h5>
               <p class="card-text"><%= truncate(post.memo, length: 50) %></p>
-              <p class="card-text"><small class="text-muted"><%= post.created_at.strftime("%Y年%m月%d日") %></small></p>
+              <p class="card-text">
+                <small class="text-muted"><%= post.created_at.strftime("%Y年%m月%d日") %></small>
+              </p>
+
               <%= link_to '投稿を見る', post_path(post), class: "btn btn-outline-primary btn-sm" %>
               <%= button_to '削除', post_path(post), method: :delete, class: "btn btn-outline-danger btn-sm", form: { onsubmit: "return confirm('本当に削除しますか？');", class: "d-inline" } %>
             </div>
