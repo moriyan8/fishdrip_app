@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   end
 
   resources :posts, only: [:new, :create, :show, :destroy] do
+    resource :favorites, only: [:create, :destroy]
     collection do
       get :map
     end

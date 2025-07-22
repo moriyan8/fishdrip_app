@@ -177,3 +177,8 @@
   background-color: #001d35;
   opacity: 8%;
 }
+
+.favorite-count {
+  color: white;
+  font-weight: normal;
+}

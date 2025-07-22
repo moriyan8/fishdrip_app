@@ -22,6 +22,8 @@
             <p class="card-text fs-6 mb-1"><strong>天気:</strong> <%= I18n.t("weather.#{@post.weather}") %></p>
             <p class="card-text fs-6 mb-1"><strong>気温:</strong> <%= @post.temperature %> ℃</p>
 
+            <td><%= render "favorites/btn", post: @post %></td>
+
             <% if @post.memo.present? %>
               <p class="card-text fs-6 mb-1"><strong>メモ:</strong> <%= @post.memo %></p>
             <% end %>

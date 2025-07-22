@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :posts, dependent: :destroy
 
+  has_many :favorites, dependent: :destroy
+
   def using_oauth?
     user_authentications.any? || (
       respond_to?(:user_authentications_attributes) && user_authentications_attributes&.any?
