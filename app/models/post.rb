@@ -7,6 +7,13 @@ class Post < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
+  def self.search_keyword(keyword)
+    where(
+      "fish_name ILIKE :kw OR spot_detail ILIKE :kw OR CAST(fishing_date AS TEXT) ILIKE :kw",
+      kw: "%#{keyword}%"
+    )
+  end
+
   validates :image, presence: true
   validates :fish_name, presence: true
   validates :fishing_date, presence: true

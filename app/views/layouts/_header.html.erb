@@ -7,6 +7,12 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
+      <!-- 検索 -->
+      <%= form_with url: root_path, method: :get, local: true, class: "d-flex", html: { role: "search" } do |f| %>
+        <%= text_field_tag :keyword, params[:keyword], class: "form-control me-2", placeholder: "検索" %>
+        <%= submit_tag "search", class: "btn btn-outline-success" %>
+      <% end %>
+
       <!-- メニュー本体 -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto align-items-center">
