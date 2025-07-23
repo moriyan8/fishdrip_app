@@ -6,7 +6,12 @@
           <!-- 左：画像 -->
           <div class="col-md-4">
             <% if post.image.attached? %>
-              <%= link_to image_tag(post.image, class: "img-contained rounded-0", alt: post.fish_name), post_path(post) %>
+              <%= link_to post_path(post) do %>
+                <picture>
+                  <source srcset="<%= url_for(post.image.variant(format: :webp, resize_to_limit: [800, 800]).processed) %>" type="image/webp">
+                  <img src="<%= url_for(post.image.variant(resize_to_limit: [800, 800])) %>" class="img-contained rounded-0" alt="<%= post.fish_name %>" loading="lazy">
+                </picture>
+              <% end %>
             <% else %>
               <%= link_to image_tag("no-image.png", class: "img-contained rounded-0", alt: "No image"), post_path(post) %>
             <% end %>

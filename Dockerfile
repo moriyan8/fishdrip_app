@@ -50,6 +50,9 @@ COPY . .
 # Precompile assets (SECRET_KEY_BASEはRenderの環境変数でセット)
 RUN SECRET_KEY_BASE=DUMMY ./bin/rails assets:precompile
 
+RUN apt-get update && \
+    apt-get install -y imagemagick webp
+
 # 非rootユーザーで実行（セキュリティ向上）
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
