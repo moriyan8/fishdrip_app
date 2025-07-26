@@ -80,6 +80,9 @@ group :development do
 
   # letter_opener
   gem 'letter_opener'
+
+  # brakeman
+  gem 'brakeman', require: false
 end
 
 group :test do
