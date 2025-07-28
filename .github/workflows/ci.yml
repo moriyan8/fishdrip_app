@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -20,15 +19,14 @@ jobs:
           bundler-cache: true
           rubygems: latest
 
-      - name: Scan for common Rails security vulnerabilities using static analysis
+      - name: Brakeman (Rails Security Scan)
         run: bin/brakeman --no-pager
 
   scan_js:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -37,14 +35,14 @@ jobs:
           bundler-cache: true
           rubygems: latest
 
-      - name: Scan for security vulnerabilities in JavaScript dependencies
+      - name: Importmap Audit
         run: bin/importmap audit
 
   lint:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -53,7 +51,7 @@ jobs:
           bundler-cache: true
           rubygems: latest
 
-      - name: Lint code for consistent style
+      - name: RuboCop
         run: bin/rubocop -f github
 
   test:
@@ -67,14 +65,24 @@ jobs:
           POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
-        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: >-
+          --health-cmd="pg_isready"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
 
     steps:
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips postgresql-client
+      - name: Install system packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            google-chrome-stable \
+            curl \
+            libjemalloc2 \
+            libvips \
+            postgresql-client
 
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -83,16 +91,19 @@ jobs:
           bundler-cache: true
           rubygems: latest
 
-      - name: Run tests
+      - name: Run Tests
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
-        run: bin/rails db:test:prepare test test:system
+        run: |
+          bin/rails db:test:prepare
+          bin/rails test
+          bin/rails test:system
 
-      - name: Keep screenshots from failed system tests
+      - name: Upload screenshots if failed
         uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: screenshots
-          path: ${{ github.workspace }}/tmp/screenshots
+          path: tmp/screenshots
           if-no-files-found: ignore
