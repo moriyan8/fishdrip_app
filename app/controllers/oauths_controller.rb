@@ -1,6 +1,6 @@
-require 'net/http'
-require 'uri'
-require 'json'
+require "net/http"
+require "uri"
+require "json"
 
 class OauthsController < ApplicationController
   skip_before_action :authenticate_user!
@@ -28,10 +28,10 @@ class OauthsController < ApplicationController
           user = User.create!(
             email: email,
             name: name.presence || "Google User #{uid}",
-            user_authentications_attributes: [{
+            user_authentications_attributes: [ {
               provider: "google",
               uid: uid
-            }]
+            } ]
           )
           auto_login(user)
         rescue ActiveRecord::RecordInvalid => e

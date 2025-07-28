@@ -30,6 +30,6 @@ class User < ApplicationRecord
 end
 
 # メール機能、実装予定日遅らせます。
-  # def deliver_activation_email!
-  #   UserMailer.activation_needed_email(self).deliver_now
-  # end
+# def deliver_activation_email!
+#   UserMailer.activation_needed_email(self).deliver_now
+# end

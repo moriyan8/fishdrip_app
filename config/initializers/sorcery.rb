@@ -1,13 +1,11 @@
 Rails.application.config.sorcery.submodules = [
   :remember_me,
-  :external,
+  :external
   # :user_activation
 ]
 
 Rails.application.config.sorcery.configure do |config|
-
   config.user_config do |user|
-
     # user.user_activation_mailer = UserMailer
     # user.activation_token_attribute_name = :activation_token
     # user.activation_state_attribute_name = :activation_state
@@ -17,7 +15,7 @@ Rails.application.config.sorcery.configure do |config|
     # user.activation_success_email_method_name = :activation_success_email
   end
 
-  config.external_providers = [:google]
+  config.external_providers = [ :google ]
 
   config.google.key = ENV["GOOGLE_CLIENT_ID"]
   config.google.secret = ENV["GOOGLE_CLIENT_SECRET"]

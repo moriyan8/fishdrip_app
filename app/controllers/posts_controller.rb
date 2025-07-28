@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:show]
+  skip_before_action :authenticate_user!, only: [ :show ]
 
   def new
     @post = Post.new
@@ -15,9 +15,9 @@ class PostsController < ApplicationController
 
     if @post.save
       if @post.status == "post"
-        redirect_to root_path, notice: '投稿が完了しました！'
+        redirect_to root_path, notice: "投稿が完了しました！"
       else
-        redirect_to user_path(current_user), notice: '記録が完了しました！'
+        redirect_to user_path(current_user), notice: "記録が完了しました！"
       end
     else
       render :new, status: :unprocessable_entity
@@ -28,9 +28,9 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post.user == current_user
       @post.destroy
-      redirect_to user_path(current_user), notice: '投稿を削除しました。'
+      redirect_to user_path(current_user), notice: "投稿を削除しました。"
     else
-      redirect_to root_path, alert: '削除に失敗しました。'
+      redirect_to root_path, alert: "削除に失敗しました。"
     end
   end
 

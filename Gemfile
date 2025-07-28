@@ -36,21 +36,21 @@ gem "bootsnap", require: false
 
 gem "sorcery"
 
-gem 'oauth2'
+gem "oauth2"
 
 gem "i18n"
 
-gem 'aws-sdk-s3'
+gem "aws-sdk-s3"
 
-gem 'rack-cors'
+gem "rack-cors"
 
-gem 'ransack'
+gem "ransack"
 
-gem 'mini_magick'
+gem "mini_magick"
 
-gem 'image_processing'
+gem "image_processing"
 
-gem 'nokogiri', '~> 1.15'
+gem "nokogiri", "~> 1.15"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -62,13 +62,13 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
-  gem 'dotenv-rails'
+  gem "dotenv-rails"
 
-  gem 'rspec-rails'
+  gem "rspec-rails"
 
-  gem 'factory_bot_rails'
+  gem "factory_bot_rails"
 
-  gem 'faker'
+  gem "faker"
 end
 
 group :development do
@@ -79,10 +79,13 @@ group :development do
   # gem "error_highlight", ">= 0.4.0", platforms: [ :ruby ]
 
   # letter_opener
-  gem 'letter_opener'
+  gem "letter_opener"
 
-  # brakeman
-  gem 'brakeman', require: false
+  # rubocop
+  gem "rubocop", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec"
 end
 
 group :test do
@@ -94,4 +97,4 @@ end
 
 gem "jsbundling-rails", "~> 1.3"
 
-gem "letter_opener_web", "~> 3.0", :group => :development
+gem "letter_opener_web", "~> 3.0", group: :development

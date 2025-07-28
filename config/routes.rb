@@ -14,8 +14,8 @@ Rails.application.routes.draw do
 
   # ログイン・ログアウトルート
   get "/login", to: "sessions#new", as: :login
-  post '/login',  to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy', as: :logout
+  post "/login",  to: "sessions#create"
+  delete "/logout", to: "sessions#destroy", as: :logout
 
   # Defines the root path route ("/")
   # root "posts#index"
@@ -28,16 +28,16 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
-  root 'home#index'
-  resources :users, only: [:new, :create, :show, :edit, :update] do
+  root "home#index"
+  resources :users, only: [ :new, :create, :show, :edit, :update ] do
     collection do
-      get 'activate', to: 'users#activate'
+      get "activate", to: "users#activate"
       get :resend_activation
     end
   end
 
-  resources :posts, only: [:new, :create, :show, :destroy] do
-    resource :favorites, only: [:create, :destroy]
+  resources :posts, only: [ :new, :create, :show, :destroy ] do
+    resource :favorites, only: [ :create, :destroy ]
     collection do
       get :map
     end
@@ -45,13 +45,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :nfts, only: [:create]
+      resources :nfts, only: [ :create ]
     end
   end
 
-  resources :sessions, only: [:new, :create, :destroy]
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
-
+  resources :sessions, only: [ :new, :create, :destroy ]
+  get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
 end
