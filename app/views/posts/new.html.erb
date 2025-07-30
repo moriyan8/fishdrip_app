@@ -65,6 +65,12 @@
           <%= form.text_field :spot_detail, class: "form-control", placeholder: "例：長崎県五島列島田の浦港" %>
         </div>
 
+        <%= form.hidden_field :latitude, id: 'latitude' %>
+        <%= form.hidden_field :longitude, id: 'longitude' %>
+
+        <%= "場所を選択してください。" %>
+        <div id="new-map" style="height: 400px; width: 100%;"></div>
+
         <%= form.hidden_field :status, value: "post" %>
 
         <div class="d-flex justify-content-center gap-2">
@@ -79,3 +85,92 @@
     </div>
   </div>
 </div>
+
+<script>
+  let map;
+  let marker;
+
+  function initializeMap(centerPosition) {
+    const mapElement = document.getElementById("new-map");
+    if (!mapElement) return; // mapが存在しないページでは何もしない
+
+    map = new google.maps.Map(mapElement, {
+      center: centerPosition,
+      zoom: 10,
+    });
+
+    // すでに保存された緯度経度があればマーカーを立てる
+    marker = new google.maps.Marker({
+      position: centerPosition,
+      map: map,
+    });
+
+    map.addListener("click", (e) => {
+      const lat = e.latLng.lat();
+      const lng = e.latLng.lng();
+
+      document.getElementById("latitude").value = lat;
+      document.getElementById("longitude").value = lng;
+
+      if (marker) {
+        marker.setMap(null);
+      }
+
+      marker = new google.maps.Marker({
+        position: { lat, lng },
+        map: map,
+      });
+    });
+  }
+
+  function initMapManually() {
+    const latField = document.getElementById("latitude");
+    const lngField = document.getElementById("longitude");
+    const mapElement = document.getElementById("new-map");
+
+    if (!mapElement) return; // 対象のmapが存在しないページでは無視
+
+    const lat = parseFloat(latField?.value);
+    const lng = parseFloat(lngField?.value);
+
+    if (!isNaN(lat) && !isNaN(lng)) {
+      initializeMap({ lat, lng });
+    } else {
+      const defaultPosition = { lat: 35.6804, lng: 139.7690 }; // 東京駅
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            initializeMap({
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            });
+          },
+          () => {
+            initializeMap(defaultPosition);
+          }
+        );
+      } else {
+        initializeMap(defaultPosition);
+      }
+    }
+  }
+
+  // Turbo対応
+  document.addEventListener("turbo:load", function () {
+    if (typeof google !== "undefined" && google.maps) {
+      initMapManually();
+    } else {
+      // maps APIが読み込まれていなければ少し待ってから再試行
+      let retries = 0;
+      const interval = setInterval(() => {
+        if (typeof google !== "undefined" && google.maps) {
+          clearInterval(interval);
+          initMapManually();
+        } else if (retries++ > 10) {
+          clearInterval(interval);
+          console.warn("Google Mapsの読み込みに失敗しました。");
+        }
+      }, 300);
+    }
+  });
+</script>

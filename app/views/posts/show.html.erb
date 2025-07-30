@@ -38,9 +38,56 @@
         <div class="px-4 py-2 text-light">
           <i class="bi bi-geo-alt fs-3 me-2"></i>
           <%= @post.spot_detail.presence || "未設定" %>
+
+          <!-- マップ表示用のHTML -->
+          <div id="show-map" style="height: 400px; width: 100%;"></div>
+
         </div>
 
       </div>
     </div>
   </div>
 </div>
+
+
+<script>
+  function initShowMap() {
+    const mapElement = document.getElementById("show-map");
+    if (!mapElement) return;
+
+    const lat = <%= @post.latitude || 35.6804 %>;
+    const lng = <%= @post.longitude || 139.7690 %>;
+
+    const position = { lat, lng };
+
+    const map = new google.maps.Map(mapElement, {
+      center: position,
+      zoom: 12,
+    });
+
+    new google.maps.Marker({
+      position: position,
+      map: map,
+      title: "投稿地点"
+    });
+  }
+
+  document.addEventListener("turbo:load", () => {
+    // Google Maps がロードされていれば実行
+    if (typeof google !== "undefined" && google.maps) {
+      initShowMap();
+    } else {
+      // Google Maps の読み込み待機（最大10回）
+      let retries = 0;
+      const interval = setInterval(() => {
+        if (typeof google !== "undefined" && google.maps) {
+          clearInterval(interval);
+          initShowMap();
+        } else if (retries++ > 10) {
+          clearInterval(interval);
+          console.warn("Google Mapsの読み込みに失敗しました。");
+        }
+      }, 300);
+    }
+  });
+</script>
