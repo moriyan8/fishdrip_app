@@ -35,7 +35,7 @@ class PostsController < ApplicationController
   end
 
   def map
-    @posts = Post.all
+    @posts = Post.where(user_id: current_user.id)
   end
 
   private
