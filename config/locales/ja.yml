@@ -38,3 +38,9 @@ ja:
     cloudy: "くもり"
     rainy: "雨"
     snowy: "雪"
+  meta_tags:
+    defaults:
+      site: "FishDrip"
+      title: "釣果を記録・共有できるサービス"
+      description: "全国の釣果情報を投稿・記録・共有できるコミュニティ"
+      keywords: "釣り, 釣果, FishDrip, 海釣り"

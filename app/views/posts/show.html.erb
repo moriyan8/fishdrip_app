@@ -1,3 +1,10 @@
+<% assign_meta_tags(
+  title: "#{@post.fish_name}が釣れた！",
+  image: url_for(@post.image),
+  description: "釣行日時：#{@post.fishing_date.strftime('%Y/%m/%d')}に#{@post.fish_name}が釣れました!",
+  keywords: "釣り, #{@post.fish_name}, FishDrip"
+) %>
+
 <div class="text-light fs-3 mb-4">
   <div class="d-flex flex-column gap-2">
     <div class="card border-0 rounded-0" style="background-color: #1f1f1f; border-bottom: 1px solid #3a3a3a;">
