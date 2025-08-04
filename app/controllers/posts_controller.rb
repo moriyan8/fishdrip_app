@@ -7,6 +7,11 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+
+    if @post.status == "record" && @post.user != current_user
+      # 他人の「記録」を見ようとしたら 404
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   def create
