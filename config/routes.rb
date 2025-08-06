@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "pages/terms"
+  get "pages/privacy"
   get "home/index"
   get "header_partial", to: "layouts#header_partial"
 
@@ -19,6 +21,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  #利用規約、プライバシーポリシー
+  get 'terms', to: 'pages#terms'
+  get 'privacy', to: 'pages#privacy'
 
   # Googleログイン
   get "/oauth/callback", to: "oauths#callback"
