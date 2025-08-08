@@ -5,6 +5,8 @@
 # below each fixture, per the syntax in the comments below
 #
 one: {}
+  name: Test User
+  email: test@example.com
 # column: value
 #
 two: {}
