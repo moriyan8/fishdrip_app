@@ -20,6 +20,8 @@ jobs:
           rubygems: latest
 
       - name: Brakeman (Rails Security Scan)
+        env:
+          BRAKEMAN_IGNORE_RUBY_VERSION: 1
         run: bin/brakeman --no-pager
 
   scan_js:
