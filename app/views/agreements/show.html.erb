@@ -1,0 +1,18 @@
+<div class="container my-5">
+  <div class="card shadow-sm">
+    <div class="card-body bg-white">
+      <h1>利用規約・プライバシーポリシーの確認</h1>
+
+      <p>以下の内容をご確認ください。</p>
+      <ul>
+        <li><a href="/terms" target="_blank">利用規約</a></li>
+        <li><a href="/privacy" target="_blank">プライバシーポリシー</a></li>
+      </ul>
+
+      <%= form_with url: policy_agreement_path, method: :post do %>
+        <%= submit_tag "同意してサービスを利用する" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

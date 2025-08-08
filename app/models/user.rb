@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  attribute :agreed_to_policy, :boolean, default: false
+
   has_many :user_authentications, dependent: :destroy
   accepts_nested_attributes_for :user_authentications
 
@@ -19,6 +21,14 @@ class User < ApplicationRecord
       !using_oauth?
     else
       password.present?
+    end
+  end
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.name = auth.info.name
+      user.email = auth.info.email
+      user.agreed_to_policy = false
     end
   end
 

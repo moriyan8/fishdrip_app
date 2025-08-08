@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :user_signed_in?
   before_action :authenticate_user!
+  before_action :check_policy_agreement
 
   def user_signed_in?
     current_user.present?
@@ -16,5 +17,17 @@ class ApplicationController < ActionController::Base
     unless user_signed_in?
       redirect_to root_path, alert: "ログインが必要です"
     end
+  end
+
+  private
+
+  def check_policy_agreement
+    if current_user && !current_user.agreed_to_policy? && !on_policy_agreement_page?
+      redirect_to policy_agreement_path
+    end
+  end
+
+  def on_policy_agreement_page?
+    controller_name == 'agreements' && action_name == 'show'
   end
 end
