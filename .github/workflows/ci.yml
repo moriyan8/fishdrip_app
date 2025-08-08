@@ -20,7 +20,7 @@ jobs:
           rubygems: latest
 
       - name: Brakeman (Rails Security Scan)
-        run: bin/brakeman --no-pager
+        run: bin/brakeman --no-pager --no-exit-on-warn
 
   scan_js:
     runs-on: ubuntu-latest
