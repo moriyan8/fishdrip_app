@@ -28,6 +28,6 @@ class ApplicationController < ActionController::Base
   end
 
   def on_policy_agreement_page?
-    controller_name == 'agreements' && action_name == 'show'
+    controller_name == "agreements" && action_name == "show"
   end
 end

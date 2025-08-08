@@ -24,12 +24,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  #利用規約、プライバシーポリシー
-  get 'terms', to: 'pages#terms'
-  get 'privacy', to: 'pages#privacy'
+  # 利用規約、プライバシーポリシー
+  get "terms", to: "pages#terms"
+  get "privacy", to: "pages#privacy"
 
-  get '/policy_agreement', to: 'agreements#show'
-  post '/policy_agreement', to: 'agreements#agree'
+  get "/policy_agreement", to: "agreements#show"
+  post "/policy_agreement", to: "agreements#agree"
 
   # Googleログイン
   get "/oauth/callback", to: "oauths#callback"
