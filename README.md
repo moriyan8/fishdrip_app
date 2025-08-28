@@ -29,24 +29,32 @@ FishDripは、釣りを楽しみながら記録・投稿することでNFTを獲
 ### ■ユーザー機能
 ### 〜ユーザー登録〜
 - googleログイン
+
 [![Image from Gyazo](https://i.gyazo.com/eca0ef78fa88e37769fb021bc355c0ff.gif)](https://gyazo.com/eca0ef78fa88e37769fb021bc355c0ff)
 
 - ユーザー登録（メールアドレス）
+
 [![Image from Gyazo](https://i.gyazo.com/9f217960fd09499953b487777837099f.gif)](https://gyazo.com/9f217960fd09499953b487777837099f)
 
 # 使用技術
 | カテゴリ | 技術 |
 | --- | --- |
-| フロントエンド |  /  /  |
-| バックエンド | Ruby  / Ruby on Rails  |
-| データベース | PostgreSQL  |
-| 認証 |  |
+| フロントエンド | Ruby on Rails / JavaScript |
+| バックエンド | Ruby  / Ruby on Rails |
+| データベース | PostgreSQL 17.4 |
 | 環境構築 | Docker |
-| CI/CD | Github |
-| インフラ | Amazon S3 |
-| その他 | / letter opener web |
+| CI/CD | Github Actions |
+| ファイルサーバー | Amazon S3 |
+| アプリケーションサーバー | Render |
+| その他 | Bootstrap / Hotwire / letter opener web |
+||
+| NFT関連 |
+| カテゴリ | 技術 |
+| フロントエンド | React / TypeScript / Vite / Tailwind CSS |
+| ライブラリ | thirdweb |
+
 
 # インフラ構成
 
 # ER図
-https://i.gyazo.com/be3cc0bff69849434c89a2c89bd5efe3.png
+[![Image from Gyazo](https://i.gyazo.com/f1bc9013eed1e6b90b15eed122616e02.png)](https://gyazo.com/f1bc9013eed1e6b90b15eed122616e02)
