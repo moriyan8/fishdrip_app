@@ -2,7 +2,7 @@
 # syntax = docker/dockerfile:1
 
 # Make sure this matches .ruby-version
-ARG RUBY_VERSION=3.2.8
+ARG RUBY_VERSION=3.2.2
 FROM ruby:$RUBY_VERSION-slim AS base
 
 WORKDIR /app
