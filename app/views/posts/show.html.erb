@@ -1,8 +1,8 @@
 <% assign_meta_tags(
-  title: "#{@post.fish_name}が釣れた！",
-  image: url_for(@post.image),
-  description: "釣行日時：#{@post.fishing_date.strftime('%Y/%m/%d')}に#{@post.fish_name}が釣れました!",
-  keywords: "釣り, #{@post.fish_name}, FishDrip"
+  title: "#{strip_tags(@post.fish_name)}が釣れた！",
+  image: @post.image.attached? ? url_for(@post.image) : image_url("fishdrip_ogp.png"),
+  description: "釣行日時：#{@post.fishing_date.strftime('%Y/%m/%d')}に#{strip_tags(@post.fish_name)}が釣れました!",
+  keywords: "釣り, #{strip_tags(@post.fish_name)}, FishDrip"
 ) %>
 
 <div class="text-light fs-3 mb-4">
