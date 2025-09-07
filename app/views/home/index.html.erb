@@ -1,40 +1,39 @@
 <div class="text-light fs-3 mb-4">
   <div class="d-flex flex-column gap-2">
     <% @posts.each do |post| %>
-      <div class="card border-0 rounded-0" style="background-color: #1f1f1f; border-bottom: 1px solid #3a3a3a;">
-        <div class="row g-0 align-items-center">
-          <!-- 左：画像 -->
-          <div class="col-md-4">
-            <% if post.image.attached? %>
-              <%= link_to post_path(post) do %>
+      <%= link_to post_path(post), class: "text-decoration-none" do %>
+        <div class="card border-0 rounded-0 h-100"
+             style="background-color: #1f1f1f; border-bottom: 1px solid #3a3a3a;">
+          <div class="row g-0 align-items-center">
+            <!-- 左：画像 -->
+            <div class="col-md-4">
+              <% if post.image.attached? %>
                 <picture>
-                  <source srcset="<%= url_for(post.image.variant(format: :webp, resize_to_limit: [800, 800]).processed) %>" type="image/webp">
-                  <img src="<%= url_for(post.image.variant(resize_to_limit: [800, 800])) %>" class="img-contained rounded-0" alt="<%= post.fish_name %>" loading="lazy">
+                  <source srcset="<%= url_for(post.image.variant(format: :webp, resize_to_limit: [800, 800])) %>" type="image/webp">
+                  <img src="<%= url_for(post.image.variant(resize_to_limit: [800, 800])) %>"
+                       class="img-contained rounded-0"
+                       alt="<%= post.fish_name %>"
+                       loading="lazy">
                 </picture>
+              <% else %>
+                <%= image_tag("no-image.png", class: "img-contained rounded-0", alt: "No image") %>
               <% end %>
-            <% else %>
-              <%= link_to image_tag("no-image.png", class: "img-contained rounded-0", alt: "No image"), post_path(post) %>
-            <% end %>
-          </div>
+            </div>
 
-          <!-- 右：情報 -->
-          <div class="col-md-8">
-            <div class="card-body text-light">
-              <!-- 魚の名前 -->
-              <h5 class="card-title fs-4 fw-bold mb-2 text-white"><%= post.fish_name %></h5>
-
-              <!-- 投稿者名 -->
-              <p class="card-text fs-6 mb-1 text-secondary">投稿者: <%= post.user.name %></p>
-              <!-- その他の情報 -->
-              <p class="card-text fs-6 mb-1"><strong>サイズ:</strong> <%= post.fish_size %> cm</p>
-              <p class="card-text fs-6 mb-1"><strong>釣れた場所:</strong> <%= post.spot_detail %></p>
-              <p class="card-text fs-6 mb-1"><strong>日時:</strong> <%= l(post.fishing_date, format: :short) %></p>
-              <!-- コメント -->
-              <p class="card-text fs-6 text-light"><%= truncate(post.comment, length: 60) %></p>
+            <!-- 右：情報 -->
+            <div class="col-md-8">
+              <div class="card-body text-light">
+                <h5 class="card-title fs-4 fw-bold mb-2 text-white"><%= post.fish_name %></h5>
+                <p class="card-text fs-6 mb-1 text-secondary">投稿者: <%= post.user.name %></p>
+                <p class="card-text fs-6 mb-1"><strong>サイズ:</strong> <%= post.fish_size %> cm</p>
+                <p class="card-text fs-6 mb-1"><strong>釣れた場所:</strong> <%= post.spot_detail %></p>
+                <p class="card-text fs-6 mb-1"><strong>日時:</strong> <%= l(post.fishing_date, format: :short) %></p>
+                <p class="card-text fs-6 text-light"><%= truncate(post.comment, length: 60) %></p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>
