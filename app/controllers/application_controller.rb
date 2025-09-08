@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  rescue_from StandardError, with: :render_500
+
   allow_browser versions: :modern
   helper_method :current_user
   helper_method :user_signed_in?
@@ -29,5 +32,16 @@ class ApplicationController < ActionController::Base
 
   def on_policy_agreement_page?
     controller_name == "agreements" && action_name == "show"
+  end
+
+  def render_404(exception = nil)
+    logger.error("404 Not Found: #{exception.message}") if exception
+    render file: Rails.root.join("public/404.html"), status: :not_found, layout: false
+  end
+
+  def render_500(exception = nil)
+    logger.error("500 Internal Server Error: #{exception.message}")
+    logger.error(exception.backtrace.join("\n")) if exception
+    render file: Rails.root.join("public/500.html"), status: :internal_server_error, layout: false
   end
 end
