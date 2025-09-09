@@ -9,6 +9,7 @@ class HomeController < ApplicationController
       posts = posts.search_keyword(params[:keyword])
     end
 
-    @posts = posts.order(fishing_date: :desc)
+    @posts = posts.order(fishing_date: :desc).page(params[:page]).per(15)
+
   end
 end
