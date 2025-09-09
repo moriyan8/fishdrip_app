@@ -10,6 +10,5 @@ class HomeController < ApplicationController
     end
 
     @posts = posts.order(fishing_date: :desc).page(params[:page]).per(15)
-
   end
 end
