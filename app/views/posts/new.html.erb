@@ -19,18 +19,21 @@
         <!-- 写真 -->
         <div class="mb-3">
           <%= form.label :image, "写真", class: "form-label" %>
+          <span class="badge bg-danger ms-1">必須</span>
           <%= form.file_field :image, class: "form-control" %>
         </div>
 
         <!-- 日時 -->
         <div class="mb-3">
           <%= form.label :fishing_date, "釣行日時", class: "form-label" %>
+          <span class="badge bg-danger ms-1">必須</span>
           <%= form.datetime_field :fishing_date, class: "form-control" %>
         </div>
 
         <!-- 魚種 -->
         <div class="mb-3">
           <%= form.label :fish_name, "魚種", class: "form-label" %>
+          <span class="badge bg-danger ms-1">必須</span>
           <%= form.text_field :fish_name, class: "form-control", placeholder: "例：スズキ" %>
         </div>
 
