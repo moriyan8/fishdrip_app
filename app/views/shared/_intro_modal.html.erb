@@ -1,0 +1,45 @@
+<div class="modal fade" id="introModal" tabindex="-1" aria-labelledby="introModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-dark text-light">
+      <div class="modal-header">
+        <h5 class="modal-title" id="introModalLabel">ようこそ FishDrip へ！</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="閉じる"></button>
+      </div>
+      <div class="modal-body">
+        <p>はじめまして！FishDrip の簡単な使い方:</p>
+        <ul>
+          <li>投稿で釣果を記録できます</li>
+          <li>マップで記録を表示できます</li>
+          <li>NFT やプロフィール設定も可能です</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">わかった</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    function showIntroModalIfExists() {
+      const el = document.getElementById('introModal');
+      if (!el) return;
+
+      // bootstrap がロードされているか確認
+      const Modal = window.bootstrap && window.bootstrap.Modal;
+      if (!Modal) {
+        console.warn("Bootstrap JS が存在しません。cdn で bootstrap.bundle.min.js を読み込むか、application.js に import してください。");
+        return;
+      }
+
+      const modal = new Modal(el);
+      modal.show();
+    }
+
+    // Turbo を使っている場合
+    document.addEventListener('turbo:load', showIntroModalIfExists);
+    // 通常ロード
+    document.addEventListener('DOMContentLoaded', showIntroModalIfExists);
+  })();
+</script>

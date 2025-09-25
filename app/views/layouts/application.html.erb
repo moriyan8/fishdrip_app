@@ -107,6 +107,13 @@
     <!-- モーダル -->
     <%= render "shared/login_modal" %>
 
+    <% if session.delete(:show_intro_modal) %>
+      <%= render "shared/intro_modal" %>
+    <% end %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
     <!-- JS読み込み -->
     <%= javascript_include_tag 'https://kit.fontawesome.com/a076d05399.js' %>
   </body>
