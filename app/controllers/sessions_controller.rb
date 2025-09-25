@@ -9,6 +9,13 @@ class SessionsController < ApplicationController
     @user = login(email, password, remember_me: remember)
 
     if @user
+      if @user.respond_to?(:intro_seen) && !@user.intro_seen?
+        session[:show_intro_modal] = true
+        @user.update(intro_seen: true)
+      elsif !@user.respond_to?(:intro_seen)
+        session[:show_intro_modal] = true
+      end
+
       redirect_to root_path, notice: "ログインしました"
     else
       user = User.find_by(email: params[:email])
