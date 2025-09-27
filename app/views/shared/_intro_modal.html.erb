@@ -6,15 +6,44 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="閉じる"></button>
       </div>
       <div class="modal-body">
-        <p>はじめまして！FishDrip の簡単な使い方:</p>
-        <ul>
-          <li>投稿で釣果を記録できます</li>
-          <li>マップで記録を表示できます</li>
-          <li>NFT やプロフィール設定も可能です</li>
-        </ul>
+
+        <!-- Carousel -->
+        <div id="introCarousel" class="carousel slide" data-bs-interval="false">
+          <div class="carousel-inner">
+            <!-- スライド1 -->
+            <div class="carousel-item active">
+              <p>はじめまして！FishDrip の簡単な使い方:</p>
+              <ul>
+                <li>投稿で釣果を記録できます</li>
+                <li>マップで記録を表示できます</li>
+              </ul>
+            </div>
+            <!-- スライド2 -->
+            <div class="carousel-item">
+              <p>NFT やプロフィール設定について:</p>
+              <ul>
+                <li>NFTを集めてコレクション可能</li>
+                <li>プロフィール画像を設定できます</li>
+              </ul>
+            </div>
+            <!-- スライド3 -->
+            <div class="carousel-item">
+              <p>楽しんでご利用ください 🎣</p>
+            </div>
+          </div>
+
+          <!-- ナビゲーション -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#introCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#introCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
       </div>
+
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">わかった</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">閉じる</button>
       </div>
     </div>
   </div>
