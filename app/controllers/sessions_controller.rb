@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:new, :create]
+
+  def new
+    # ログイン画面表示用
+  end
 
   def create
     email = params[:email]
@@ -16,7 +20,6 @@ class SessionsController < ApplicationController
 
       redirect_to root_path, notice: "ログインしました"
     else
-      user = User.find_by(email: params[:email])
       flash.now[:alert] = "メールアドレスまたはパスワードが正しくありません。"
       render :new, status: :unprocessable_entity
     end
