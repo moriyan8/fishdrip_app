@@ -12,4 +12,3 @@
 //= link posts:map.png
 //= link users:show.jpg
 //= link nft.png
-
