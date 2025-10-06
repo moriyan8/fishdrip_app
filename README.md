@@ -57,4 +57,4 @@ FishDripは、釣りを楽しみながら記録・投稿することでNFTを獲
 # インフラ構成
 
 # ER図
-[![Image from Gyazo](https://i.gyazo.com/f1bc9013eed1e6b90b15eed122616e02.png)](https://gyazo.com/f1bc9013eed1e6b90b15eed122616e02)
+[![Image from Gyazo](https://i.gyazo.com/b6973f08c46b3e770b17fcebeb8f57b7.png)](https://gyazo.com/b6973f08c46b3e770b17fcebeb8f57b7)
