@@ -13,12 +13,17 @@
         <!-- 左：画像と釣り場 -->
         <div class="col-4">
           <% if @post.image.attached? %>
-            <%= link_to post_path(@post) do %>
-                <picture>
-                  <source srcset="<%= url_for(@post.image.variant(format: :webp, resize_to_limit: [800, 800])) %>" type="image/webp">
-                  <img src="<%= url_for(@post.image.variant(resize_to_limit: [800, 800])) %>" class="img-contained rounded-0" alt="<%= @post.fish_name %>" loading="lazy">
-                </picture>
-              <% end %>
+            <picture>
+              <source srcset="<%= url_for(@post.image.variant(format: :webp, resize_to_limit: [800, 800])) %>" type="image/webp">
+              <img
+                src="<%= url_for(@post.image.variant(resize_to_limit: [800, 800])) %>"
+                class="img-contained rounded-0 clickable-image"
+                alt="<%= @post.fish_name %>"
+                loading="lazy"
+                data-bs-toggle="modal"
+                data-bs-target="#imageModal"
+              >
+            </picture>
           <% else %>
             <%= image_tag("no-image.png", class: "img-contained rounded-0", alt: "No image") %>
           <% end %>
@@ -98,3 +103,30 @@
     }
   });
 </script>
+
+<!-- 画像拡大モーダル -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen"> <!-- fullscreenで全画面表示 -->
+    <div class="modal-content bg-black border-0 position-relative">
+      <!-- 丸い閉じるボタン（右上固定） -->
+      <button type="button" class="btn btn-light rounded-circle position-absolute top-0 end-0 m-3 p-2 shadow"
+              data-bs-dismiss="modal" aria-label="閉じる"
+              style="z-index: 10; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+        <i class="bi bi-x-lg fs-4"></i>
+      </button>
+
+      <div class="modal-body p-0 d-flex justify-content-center align-items-center">
+        <% if @post.image.attached? %>
+          <picture>
+            <source srcset="<%= url_for(@post.image.variant(format: :webp, resize_to_limit: [2000, 2000])) %>" type="image/webp">
+            <img src="<%= url_for(@post.image.variant(resize_to_limit: [2000, 2000])) %>"
+                 alt="<%= @post.fish_name %>"
+                 class="img-fluid"
+                 style="max-height: 100vh; object-fit: contain;">
+          </picture>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

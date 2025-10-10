@@ -182,3 +182,21 @@
   color: white;
   font-weight: normal;
 }
+
+.clickable-image {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.clickable-image:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+.btn-light.rounded-circle {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(4px);
+}
+.btn-light.rounded-circle:hover {
+  background-color: rgba(255, 255, 255, 1) !important;
+}
