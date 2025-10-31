@@ -51,7 +51,7 @@ gem "mini_magick"
 
 gem "image_processing"
 
-gem "nokogiri", "~> 1.15"
+gem "nokogiri", "~> 1.18"
 
 gem "meta-tags"
 
